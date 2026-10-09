@@ -1,0 +1,25 @@
+{% macro csrf() %}
+    <input type="hidden" name="csrf" value="{{ session.csrf }}">
+{% endmacro %}
+
+{% macro nav(home=true) %}
+    <nav aria-label="Navegación principal">
+        {% if home %}
+            <a class="button" href="{{ url_for('dashboard') }}">Inicio</a>
+        {% endif %}
+        <form action="{{ url_for('logout') }}" method="post">
+            {{ csrf() }}
+            <button>Cerrar Sesión</button>
+        </form>
+    </nav>
+{% endmacro %}
+
+{% macro errors(items) %}
+    {% if items %}
+        <ul class="errors" role="alert">
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}

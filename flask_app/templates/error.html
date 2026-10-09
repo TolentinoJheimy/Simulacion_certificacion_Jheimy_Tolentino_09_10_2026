@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ message }}</h1>
+    <a href="{{ url_for('dashboard') if g.user else url_for('index') }}">Volver al inicio</a>
+{% endblock %}

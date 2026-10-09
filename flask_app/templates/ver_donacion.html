@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import nav with context %}
+
+{% block title %}{{ plushie.name }} · Donación de Peluches{% endblock %}
+
+{% block content %}
+    <div class="detail-nav">
+        {{ nav() }}
+    </div>
+    <article class="detail-card">
+        <h1>{{ plushie.name }}</h1>
+        <dl>
+            <dt>Dueño:</dt>
+            <dd>{{ plushie.donor }} {{ plushie.donor_last }}</dd>
+            <dt>Descripción:</dt>
+            <dd class="description">{{ plushie.description }}</dd>
+        </dl>
+        {% if plushie.adopter_id %}
+            <div class="stat">
+                <span>Adoptado por:</span>
+                <strong>{{ plushie.adopter }} {{ plushie.adopter_last }}</strong>
+            </div>
+        {% endif %}
+        <div class="stat">
+            <span>Visitas:</span>
+            <strong>{{ plushie.views }}</strong>
+        </div>
+    </article>
+{% endblock %}

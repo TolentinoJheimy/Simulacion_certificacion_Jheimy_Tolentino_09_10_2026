@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import csrf, nav with context %}
+
+{% block content %}
+    <header>
+        <h1>Bienvenido {{ g.user.first_name }}</h1>
+        <div class="actions">
+            <a class="button" href="{{ url_for('create') }}">Donar Peluche</a>
+            {{ nav(false) }}
+        </div>
+    </header>
+    <h2 class="list-title">Todos los Peluches</h2>
+    <div class="plushies">
+        {% for plushie in plushies %}
+            <article class="plushie-row">
+                <strong>{{ plushie.name }}</strong>
+                <span class="donor">Donador: {{ plushie.donor }}</span>
+                <a href="{{ url_for('detail', plushie_id=plushie.id) }}">Ver</a>
+                <div class="row-actions">
+                    {% if plushie.adopter_id %}
+                        <span class="adopted">ADOPTADO</span>
+                    {% endif %}
+                    {% if plushie.donor_id == g.user.id %}
+                        <a class="button" href="{{ url_for('edit', plushie_id=plushie.id) }}">Editar</a>
+                        <form
+                            action="{{ url_for('delete', plushie_id=plushie.id) }}"
+                            method="post"
+                            data-confirm="¿Borrar esta donación?"
+                        >
+                            {{ csrf() }}
+                            <button>Borrar</button>
+                        </form>
+                    {% elif not plushie.adopter_id %}
+                        <form action="{{ url_for('adopt', plushie_id=plushie.id) }}" method="post">
+                            {{ csrf() }}
+                            <button class="adopt">Adoptar</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </article>
+        {% else %}
+            <p class="empty">
+                Aún no hay peluches.
+                <a href="{{ url_for('create') }}">Crea la primera donación.</a>
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

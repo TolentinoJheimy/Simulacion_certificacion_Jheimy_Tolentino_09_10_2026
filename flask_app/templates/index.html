@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import csrf, errors as show_errors with context %}
+
+{% block content %}
+    <div class="auth-grid">
+        <section>
+            <h1>Registro</h1>
+            {% if form == 'register' %}
+                {{ show_errors(errors) }}
+            {% endif %}
+            <form action="{{ url_for('register') }}" method="post" class="fields">
+                {{ csrf() }}
+                <label for="first_name">Nombre</label>
+                <input
+                    id="first_name"
+                    name="first_name"
+                    autocomplete="given-name"
+                    value="{{ values.get('first_name', '') if form == 'register' else '' }}"
+                    required
+                    minlength="2"
+                >
+                <label for="last_name">Apellido</label>
+                <input
+                    id="last_name"
+                    name="last_name"
+                    autocomplete="family-name"
+                    value="{{ values.get('last_name', '') if form == 'register' else '' }}"
+                    required
+                    minlength="2"
+                >
+                <label for="register_email">E-mail</label>
+                <input
+                    id="register_email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    value="{{ values.get('email', '') if form == 'register' else '' }}"
+                    required
+                >
+                <label for="register_password">Contraseña</label>
+                <input
+                    id="register_password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                >
+                <label for="confirmation">Conf. Contraseña</label>
+                <input
+                    id="confirmation"
+                    name="confirmation"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                >
+                <div class="submit">
+                    <button>Registrar</button>
+                </div>
+            </form>
+        </section>
+        <section>
+            <h1>Inicio de Sesión</h1>
+            {% if form == 'login' %}
+                {{ show_errors(errors) }}
+            {% endif %}
+            <form action="{{ url_for('login') }}" method="post" class="fields">
+                {{ csrf() }}
+                <label for="login_email">E-mail</label>
+                <input
+                    id="login_email"
+                    name="email"
+                    type="email"
+                    autocomplete="username"
+                    value="{{ values.get('email', '') if form == 'login' else '' }}"
+                    required
+                >
+                <label for="login_password">Contraseña</label>
+                <input
+                    id="login_password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                >
+                <div class="submit">
+                    <button>Iniciar Sesión</button>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}

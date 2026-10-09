@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import csrf, nav, errors as show_errors with context %}
+
+{% block title %}Nueva Donación{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{% block donation_heading %}Nueva Donación{% endblock %}</h1>
+        {{ nav() }}
+    </header>
+    {{ show_errors(errors) }}
+    <form method="post" class="fields donation-form">
+        {{ csrf() }}
+        <label for="name">Nombre</label>
+        <input id="name" name="name" value="{{ values.name }}" required>
+        <label for="description">Descripción</label>
+        <textarea id="description" name="description" rows="6" required>{{ values.description }}</textarea>
+        <div class="submit">
+            <button>Guardar</button>
+        </div>
+    </form>
+{% endblock %}
