@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block titulo %}CinePedia{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    </head>
+    <body>
+        <main class="pagina">
+            <div class="contenido-pagina">
+                {% with mensajes = get_flashed_messages(with_categories=true) %}
+                    {% for categoria, mensaje in mensajes %}
+                        <p class="aviso {{ categoria }}" role="alert">{{ mensaje }}</p>
+                    {% endfor %}
+                {% endwith %}
+                {% block contenido %}{% endblock %}
+            </div>
+        </main>
+    </body>
+</html>

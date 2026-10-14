@@ -1,0 +1,404 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #262626;
+    background: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background: #fff;
+    padding: 32px;
+}
+
+.contenido-pagina {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 0 24px;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+header h1 {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+a {
+    color: #195776;
+    font-weight: 700;
+}
+
+button,
+.boton {
+    font: inherit;
+    font-size: 13px;
+    color: #222;
+    border: 1px solid #666;
+    background: white;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 1px 2px 0 #ddd;
+}
+
+button:hover,
+.boton:hover {
+    background: #eee;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #247caa;
+    outline-offset: 3px;
+}
+
+nav,
+.acciones,
+.acciones-fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 16px;
+}
+
+nav form,
+.acciones form,
+.acciones-fila form {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+}
+
+.formularios-acceso {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    max-width: 820px;
+    margin: 0 auto;
+    align-items: start;
+    gap: 38px;
+    padding-top: 4px;
+}
+
+.formularios-acceso h1 {
+    text-align: center;
+}
+
+.campos {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 12px 10px;
+    align-items: center;
+}
+
+.campos label {
+    font-size: 13px;
+}
+
+input,
+textarea {
+    font: inherit;
+    width: 100%;
+    min-width: 0;
+    border: 1px solid #666;
+    padding: 7px;
+    background: #fff;
+    border-radius: 0;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.campos label:has(+ textarea) {
+    align-self: start;
+    padding-top: 8px;
+}
+
+.enviar {
+    grid-column: 2;
+    text-align: center;
+    margin-top: 6px;
+}
+
+.pagina-formulario {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.pagina-formulario header {
+    margin-bottom: 20px;
+}
+
+.formulario-pelicula {
+    max-width: 500px;
+    margin-top: 0;
+    gap: 12px 14px;
+}
+
+.formulario-pelicula input,
+.formulario-pelicula textarea {
+    font-size: 15px;
+    padding: 8px;
+}
+
+.formulario-pelicula textarea {
+    height: 200px;
+}
+
+.formulario-pelicula .enviar {
+    text-align: right;
+    margin-top: 0;
+}
+
+.errores {
+    color: #b32626;
+    font-size: 14px;
+    padding-left: 20px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+    overflow-wrap: anywhere;
+}
+
+.aviso {
+    padding: 12px;
+    border: 1px solid #aaa;
+}
+
+.aviso.error {
+    color: #b32626;
+    background: #fff3f3;
+}
+
+.aviso.exito {
+    background: #eef6ed;
+    color: #315b2c;
+}
+
+.navegacion-detalle {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 550px;
+    margin: 0 auto 22px;
+}
+
+.ficha-pelicula {
+    border: 1px solid #555;
+    padding: 22px;
+    max-width: 550px;
+    margin: 0 auto;
+    min-height: 300px;
+    overflow-wrap: anywhere;
+}
+
+.ficha-pelicula h1 {
+    margin-bottom: 20px;
+}
+
+.ficha-pelicula dl {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+    font-size: 14px;
+}
+
+.ficha-pelicula dd {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.descripcion {
+    white-space: pre-wrap;
+}
+
+@media (max-width: 650px) {
+    .pagina {
+        padding: 20px 18px 28px;
+    }
+
+    .formularios-acceso {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .campos {
+        grid-template-columns: 105px minmax(0, 1fr);
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    .ficha-pelicula {
+        padding: 16px;
+    }
+
+    .ficha-pelicula dl {
+        grid-template-columns: 90px minmax(0, 1fr);
+    }
+}
+
+.contenedor-tabla {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    table-layout: fixed;
+    font-size: 14px;
+}
+
+th,
+td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+th {
+    background: #bbb;
+}
+
+th:first-child {
+    width: 34%;
+}
+
+th:nth-child(2) {
+    width: 24%;
+}
+
+th:nth-child(3) {
+    width: 20%;
+}
+
+th:nth-child(4) {
+    width: 22%;
+}
+
+.acciones-fila {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.boton-enlace,
+nav button {
+    font: inherit;
+    font-weight: 700;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: #195776;
+    text-decoration: underline;
+    box-shadow: none;
+}
+
+.comentarios {
+    background: #aaa;
+    border: 1px solid #555;
+    padding: 18px;
+    max-width: 550px;
+    margin: 48px auto 0;
+}
+
+.formulario-comentario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.formulario-comentario input,
+.formulario-comentario button {
+    height: 38px;
+}
+
+.formulario-comentario button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+}
+
+.lista-comentarios {
+    height: 280px;
+    overflow-y: scroll;
+    padding-right: 12px;
+    margin-top: 18px;
+}
+
+.lista-comentarios:focus-visible {
+    outline: 2px solid #195776;
+    outline-offset: 3px;
+}
+
+.comentario {
+    margin-top: 18px;
+    overflow-wrap: anywhere;
+}
+
+.comentario:first-child {
+    margin-top: 0;
+}
+
+.comentario p {
+    margin: 8px 0;
+}
+
+.comentario form {
+    text-align: right;
+}
+
+.peligro {
+    background: #a92323;
+    color: white;
+}
+
+.peligro:hover {
+    background: #861919;
+}

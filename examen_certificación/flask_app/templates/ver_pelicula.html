@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import csrf, navegacion, errores as mostrar_errores with context %}
+
+{% block contenido %}
+    {% set meses = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ] %}
+    <div class="navegacion-detalle">
+        {{ navegacion() }}
+    </div>
+    <article class="ficha-pelicula">
+        <h1>{{ pelicula.nombre }}</h1>
+        <p>Publicado por: {{ pelicula.creador_nombre }} {{ pelicula.creador_apellido }}</p>
+        <dl>
+            <dt>Director:</dt>
+            <dd>{{ pelicula.director }}</dd>
+            <dt>Fecha:</dt>
+            <dd>{{ pelicula.fecha_estreno }}</dd>
+            <dt>Sinopsis:</dt>
+            <dd class="descripcion">{{ pelicula.sinopsis }}</dd>
+        </dl>
+    </article>
+    <section class="comentarios" aria-label="Comentarios">
+        {{ mostrar_errores(errores) }}
+        {% if pelicula.creador_id != g.usuario.id %}
+            <form class="formulario-comentario" action="{{ url_for('crear_comentario', pelicula_id=pelicula.id) }}" method="post" novalidate>
+                {{ csrf() }}
+                <input
+                    name="contenido"
+                    aria-label="Comentario"
+                    placeholder="Escribe un comentario..."
+                    value="{{ contenido }}"
+                    required
+                >
+                <button>Enviar</button>
+            </form>
+        {% endif %}
+        <div class="lista-comentarios" tabindex="0" role="region" aria-label="Lista de comentarios">
+            {% for elemento in comentarios %}
+                <article class="comentario">
+                    <p><strong>{{ elemento.autor_nombre }}</strong> - {{ elemento.creado_en.day }} de {{ meses[elemento.creado_en.month - 1] }}</p>
+                    <p class="descripcion">{{ elemento.contenido }}</p>
+                    {% if elemento.usuario_id == g.usuario.id %}
+                        <form action="{{ url_for('borrar_comentario', comentario_id=elemento.id) }}" method="post">
+                            {{ csrf() }}
+                            <button class="peligro">Borrar</button>
+                        </form>
+                    {% endif %}
+                </article>
+            {% else %}
+                <p>Aún no hay comentarios.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
